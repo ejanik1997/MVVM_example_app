@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:id="@+id/list_item_rl_parent_layout">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/list_item_civ_image"
+        android:src="@mipmap/ic_launcher">
+    </de.hdodenhof.circleimageview.CircleImageView>
+
+    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_item_tv_longitude"
+        android:text="@string/longitude"
+        android:layout_toRightOf="@+id/list_item_civ_image"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30dp"
+        android:textSize="18sp"
+        android:textColor="#000" />
+
+    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_item_tv_latitude"
+        android:text="Latitude"
+        android:layout_toRightOf="@+id/list_item_tv_longitude"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30dp"
+        android:textSize="18sp"
+        android:textColor="#000" />
+
+</RelativeLayout>
