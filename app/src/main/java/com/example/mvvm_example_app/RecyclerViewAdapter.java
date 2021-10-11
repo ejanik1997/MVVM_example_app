@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
@@ -20,15 +21,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private static final String TAG = "RecycleViewAdapter";
-    private ArrayList<String> arr_images = new ArrayList<>();
-    private ArrayList<String> arr_longitude = new ArrayList<>();
-    private ArrayList<String> arr_latitude = new ArrayList<>();
+    private ArrayList<NasaPhotos> arr_nasa_photos;
     private Context rva_context;
 
-    public RecyclerViewAdapter(ArrayList<String> arr_images, ArrayList<String> arr_longitude, ArrayList<String> arr_latitude, Context rva_context) {
-        this.arr_images = arr_images;
-        this.arr_longitude = arr_longitude;
-        this.arr_latitude = arr_latitude;
+    public RecyclerViewAdapter(Context rva_context, ArrayList<NasaPhotos> arr_nasa_photos) {
+        this.arr_nasa_photos = arr_nasa_photos;
         this.rva_context = rva_context;
     }
 
@@ -44,15 +41,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG,"onBindViewHolder: called");
 
-        Glide.with(rva_context).asBitmap().load(arr_images.get(position)).into(holder.image);
-        holder.image_longitude.setText(arr_longitude.get(position));
-        holder.image_latitude.setText(arr_latitude.get(position));
+        // Set the name of the 'NicePlace'
+        ((ViewHolder)holder).image_longitude.setText(arr_nasa_photos.get(position).getLongitude());
+        ((ViewHolder)holder).image_latitude.setText(arr_nasa_photos.get(position).getLatitude());
+
+        // Set the image
+        RequestOptions defaultOptions = new RequestOptions()
+                .error(R.drawable.ic_launcher_background);
+        Glide.with(rva_context)
+                .setDefaultRequestOptions(defaultOptions)
+                .load(arr_nasa_photos.get(position).getImage())
+                .into(((ViewHolder)holder).image);
 
     }
 
     @Override
     public int getItemCount() {
-        return arr_longitude.size();
+        return arr_nasa_photos.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
