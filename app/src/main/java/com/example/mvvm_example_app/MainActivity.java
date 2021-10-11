@@ -1,6 +1,9 @@
 package com.example.mvvm_example_app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,33 +20,33 @@ public class MainActivity extends AppCompatActivity {
     //ARrHj7iS8nSPDazyFPamTbU1N0rmQsrQyggRUSrg
     private ArrayList<NasaPhotos> nasa_photos = new ArrayList<>();
     private Context ma_context;
-
+    private RecyclerView main_recycler_view;
+    private RecyclerViewAdapter main_adapter;
+    private MainActivityViewModel main_activity_vm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: start");
+        main_recycler_view = findViewById(R.id.recycler_view);
+        main_activity_vm = ViewModelProviders.of(this).get(MainActivityViewModel.class);
 
-        initialize_bitmaps();
+        main_activity_vm.init();
+        main_activity_vm.getNasaPhotos().observe(this, new Observer<List<NasaPhotos>>() {
+            @Override
+            public void onChanged(List<NasaPhotos> nasaPhotos) {
+            }
+        });
 
-    }
-    
-    private void initialize_bitmaps(){
-        Log.d(TAG, "initialize_bitmaps: preparing bitmaps");
-
-        NasaPhotos example = new NasaPhotos();
-        example.setImage("https://api.nasa.gov/planetary/earth/imagery?lon=-95.33&lat=29.78&date=2018-01-01&dim=0.15&api_key=ARrHj7iS8nSPDazyFPamTbU1N0rmQsrQyggRUSrg");
-        example.setLongitude("95.33");
-        example.setLatitude("29.78");
-        nasa_photos.add(example);
         initialize_recyclerview();
+
     }
 
     private void initialize_recyclerview(){
         Log.d(TAG, "initialize_recyclerview: preparing recyclerview");
-        RecyclerView recycler_view = findViewById(R.id.recycler_view);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter( this, nasa_photos);
-        recycler_view.setAdapter(adapter);
-        recycler_view.setLayoutManager(new LinearLayoutManager(this));
+        main_adapter = new RecyclerViewAdapter( this, main_activity_vm.getNasaPhotos().getValue());
+        RecyclerView.LayoutManager linear_layout_manager = new LinearLayoutManager(this);
+        main_recycler_view.setLayoutManager(linear_layout_manager);
+        main_recycler_view.setAdapter(main_adapter);
     }
 }

@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,16 +17,18 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private static final String TAG = "RecycleViewAdapter";
-    private ArrayList<NasaPhotos> arr_nasa_photos;
+    private List<NasaPhotos> arr_nasa_photos;
     private Context rva_context;
 
-    public RecyclerViewAdapter(Context rva_context, ArrayList<NasaPhotos> arr_nasa_photos) {
+
+    public RecyclerViewAdapter(Context rva_context, List<NasaPhotos> arr_nasa_photos) {
         this.arr_nasa_photos = arr_nasa_photos;
         this.rva_context = rva_context;
     }
@@ -41,11 +45,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG,"onBindViewHolder: called");
 
-        // Set the name of the 'NicePlace'
         ((ViewHolder)holder).image_longitude.setText(arr_nasa_photos.get(position).getLongitude());
         ((ViewHolder)holder).image_latitude.setText(arr_nasa_photos.get(position).getLatitude());
 
-        // Set the image
         RequestOptions defaultOptions = new RequestOptions()
                 .error(R.drawable.ic_launcher_background);
         Glide.with(rva_context)
