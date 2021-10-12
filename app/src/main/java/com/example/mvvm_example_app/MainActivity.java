@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         main_activity_vm.getNasaPhotos().observe(this, new Observer<List<NasaPhotos>>() {
             @Override
             public void onChanged(List<NasaPhotos> nasaPhotos) {
+                main_adapter.notifyDataSetChanged();
             }
         });
 
