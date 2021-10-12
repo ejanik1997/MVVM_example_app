@@ -25,15 +25,9 @@ public class NasaPhotosRepo {
     }
 
     private void setNasaPhotos(){
-        NasaPhotos example = new NasaPhotos();
-        example.setImage("https://api.nasa.gov/planetary/earth/imagery?lon=-95.33&lat=29.78&date=2018-01-01&dim=0.15&api_key=ARrHj7iS8nSPDazyFPamTbU1N0rmQsrQyggRUSrg");
-        example.setLongitude("95.33");
-        example.setLatitude("29.78");
+        NasaPhotos example = new NasaPhotos("95.33", "29.78");
         dataset.add(example);
-        NasaPhotos example2 = new NasaPhotos();
-        example2.setImage("https://api.nasa.gov/planetary/earth/imagery?lon=-95.22&lat=29.33&date=2018-01-01&dim=0.15&api_key=ARrHj7iS8nSPDazyFPamTbU1N0rmQsrQyggRUSrg");
-        example2.setLongitude("95.22");
-        example2.setLatitude("29.33");
+        NasaPhotos example2 = new NasaPhotos("95.22", "29.33");
         dataset.add(example2);
     }
 }

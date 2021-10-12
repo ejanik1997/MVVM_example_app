@@ -5,6 +5,14 @@ public class NasaPhotos {
     private String longitude;
     private String latitude;
 
+    public NasaPhotos() {}
+
+    public NasaPhotos(String longitude, String latitude) {
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.image = "https://api.nasa.gov/planetary/earth/imagery?lon=-"+longitude+"&lat="+latitude+"&date=2018-01-01&dim=0.15&api_key=ARrHj7iS8nSPDazyFPamTbU1N0rmQsrQyggRUSrg";
+
+    }
 
     public String getImage() {
         return image;
