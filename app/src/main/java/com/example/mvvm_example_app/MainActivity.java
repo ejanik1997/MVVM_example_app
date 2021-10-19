@@ -17,7 +17,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    //ARrHj7iS8nSPDazyFPamTbU1N0rmQsrQyggRUSrg
     private ArrayList<NasaPhotos> nasa_photos = new ArrayList<>();
     private Context ma_context;
     private RecyclerView main_recycler_view;
