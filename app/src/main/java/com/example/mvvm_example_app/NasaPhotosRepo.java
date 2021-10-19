@@ -41,7 +41,9 @@ public class NasaPhotosRepo {
         dataset.add(example2);
     }
     public static String getApiKey(){
-        //TODO: why does key always ends up being null?
+        /*TODO: why does the key always end up being null?
+                also fix that path later, but simply getting currentDir() is causing erros
+        */
         String key = null;
         Path path = Paths.get("/src/main/java/com/example/mvvm_example_app/key.txt");
         try {
